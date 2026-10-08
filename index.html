@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berke Sezer | Mechanical Engineering Student</title>
+  <meta name="description" content="Portfolio of Berke Sezer, mechanical engineering student focused on CAD design, manufacturing systems and aerodynamic testing.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="bar">
+    <a class="brand" href="#top">Berke Sezer</a>
+    <nav aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button id="theme" type="button" aria-label="Switch color theme">Dark mode</button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Berke Sezer</h1>
+        <p class="lead">Mechanical engineering student who designs parts in CAD, studies how production lines run, and tests wings in a wind tunnel.</p>
+        <div class="actions">
+          <a class="btn primary" href="assets/Berke_Sezer_CV.pdf" download>Download CV</a>
+          <a class="btn" href="#projects">See projects</a>
+          <a class="btn" href="https://github.com/KULLANICI_ADI">GitHub</a>
+          <a class="btn" href="https://linkedin.com/in/berke-sezer-363a77261">LinkedIn</a>
+        </div>
+      </div>
+      <svg class="flow" viewBox="0 0 600 300" role="img" aria-label="Streamlines of air flowing over a wing profile">
+        <g class="lines" fill="none" stroke-width="2" stroke-linecap="round">
+          <path d="M0 70 C180 70 250 40 330 52 S520 85 600 80"/>
+          <path d="M0 100 C170 100 250 76 330 86 S520 112 600 108"/>
+          <path d="M0 130 C160 130 240 108 320 116 S520 135 600 134"/>
+          <path d="M0 170 C160 170 240 196 320 188 S520 168 600 168"/>
+          <path d="M0 200 C170 200 250 232 330 222 S520 200 600 200"/>
+          <path d="M0 230 C180 230 260 262 340 252 S520 232 600 230"/>
+        </g>
+        <path class="wing" d="M120 150 C160 120 300 112 470 146 C300 164 170 176 120 150 Z"/>
+      </svg>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <p>I am a final-year mechanical engineering student at Yaşar University, graduating in June 2027. I work in Fusion 360 and SolidWorks, and I enjoy turning a measured problem into a clear recommendation, whether that is a fixture on an assembly line or a wing profile in a wind tunnel.</p>
+      <p>I am looking for an internship in manufacturing, design or R&amp;D.</p>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+
+      <article class="project">
+        <figure class="media">
+          <!-- Replace this block with your own media, for example:
+               <img src="assets/f1-wing.jpg" alt="3D printed NACA wing models on the test stand">
+               <video src="assets/smoke-test.mp4" controls muted playsinline></video> -->
+          <div class="placeholder">Add photos or video to the assets folder, then replace this block (see the comment in index.html).</div>
+        </figure>
+        <div class="body">
+          <h3>F1 DRS Upper Wing: Aerodynamic Analysis</h3>
+          <p class="meta">ME 3330 Fluid Mechanics Lab, Yaşar University, 2025 to 2026</p>
+          <p>Three scaled NACA wing profiles, designed in Fusion 360, 3D printed and tested in the T-490 open-circuit wind tunnel to compare lift, drag and flow behavior.</p>
+          <ul class="tags">
+            <li>Fusion 360</li><li>3D printing</li><li>Wind tunnel testing</li><li>Aerodynamics</li>
+          </ul>
+          <details>
+            <summary>Method and details</summary>
+            <ul>
+              <li>Sized the models to the T-490 test section, with a calculated blockage ratio of 7%.</li>
+              <li>Printed the models with FDM and finished the surfaces with 800-grit wet sandpaper to improve flow quality.</li>
+              <li>Measured lift (FL) and drag (FD) forces at multiple angles of attack.</li>
+              <li>Calculated lift and drag coefficients (CL, CD) and analyzed flow separation and vortex formation with smoke visualization.</li>
+              <li>Compared the Strouhal number (St ≈ 0.2) with the theoretical value and evaluated the three profiles against each other.</li>
+            </ul>
+          </details>
+        </div>
+      </article>
+    </section>
+
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="entry">
+        <p class="when">Aug 2025 to Sep 2025</p>
+        <div>
+          <h3>Production &amp; Quality Engineering Intern</h3>
+          <p class="meta">Sismak Otomotiv, İzmir</p>
+          <ul>
+            <li>Conducted time studies on the production line, analyzed workflows, and presented efficiency recommendations to the engineering team.</li>
+            <li>Analyzed assembly fixtures in SolidWorks and supported improvement proposals with technical documentation.</li>
+            <li>Restructured parts lists in Excel to systematize the material tracking process.</li>
+            <li>Worked across production, quality control, assembly, and engineering departments.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <div class="entry">
+        <p class="when">2022 to Jun 2027 (expected)</p>
+        <div><h3>B.Sc. Mechanical Engineering</h3><p class="meta">Yaşar University, İzmir</p></div>
+      </div>
+      <div class="entry">
+        <p class="when">2018 to 2022</p>
+        <div><h3>Anatolian High School</h3><p class="meta">Uğur Schools</p></div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <dl class="skills">
+        <dt>CAD and simulation</dt><dd>Fusion 360, SolidWorks, Ansys (basic), Proteus (basic)</dd>
+        <dt>Programming</dt><dd>MATLAB, Python (basic)</dd>
+        <dt>Engineering</dt><dd>Time study, process analysis, technical reporting, wind tunnel testing, aerodynamic coefficient calculation, 3D printing and surface finishing</dd>
+        <dt>Tools</dt><dd>MS Excel</dd>
+        <dt>Languages</dt><dd>English (B2), German (B1)</dd>
+      </dl>
+      <h3 class="sub">Certifications</h3>
+      <ul>
+        <li>Ansys Analysis Training, Udemy</li>
+        <li>SolidWorks Training, Udemy and internship</li>
+        <li>Occupational Health and Safety, University and Udemy</li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>For internship opportunities or questions about my projects, email me.</p>
+      <p><a href="mailto:berkeszr@gmail.com">berkeszr@gmail.com</a><br>
+         <a href="https://linkedin.com/in/berke-sezer-363a77261">linkedin.com/in/berke-sezer-363a77261</a><br>
+         <a href="https://github.com/KULLANICI_ADI">github.com/KULLANICI_ADI</a></p>
+    </section>
+  </main>
+
+  <footer><p>© 2026 Berke Sezer</p></footer>
+
+  <script>
+    var root = document.documentElement, btn = document.getElementById('theme');
+    function label() { btn.textContent = root.getAttribute('data-theme') === 'dark' ? 'Light mode' : 'Dark mode'; }
+    try { var s = localStorage.getItem('theme'); if (s) root.setAttribute('data-theme', s); } catch (e) {}
+    if (!root.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches) root.setAttribute('data-theme', 'dark');
+    label();
+    btn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      label();
+    });
+  </script>
+</body>
+</html>

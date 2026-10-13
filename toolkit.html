@@ -182,6 +182,7 @@
       out('c_r', r, t);
     }
     fill($('c_q'), Object.keys(UNITS), 0); onQuantity();
+    $('c_q').addEventListener('change', onQuantity);
 
     var map = { wind: wind, block: block, st: st, ts: ts, pw: pw, conv: conv };
     Object.keys(map).forEach(function (id) {

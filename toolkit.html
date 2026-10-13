@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ME Toolkit | Berke Sezer</title>
+  <meta name="description" content="Small browser calculators for mechanical engineering: wind tunnel coefficients, blockage ratio, Strouhal number, time study and unit conversion.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-head{padding:3rem 0 1rem}
+    .page-head p{color:var(--muted);max-width:60ch}
+    .tools{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;padding-bottom:3rem}
+    .tool{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:1.2rem;border-top:1px solid var(--line)}
+    .tool.wide{grid-column:1/-1}
+    .tool h2{font-size:1.35rem;margin-bottom:.3rem}
+    .tool .note{color:var(--muted);font-size:.88rem;margin:.2rem 0 1rem}
+    .fields{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+    label{display:flex;flex-direction:column;font-size:.88rem;color:var(--muted);gap:.25rem}
+    input,select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:.45rem .6rem;width:100%}
+    .results{margin:1rem 0 0;display:grid;grid-template-columns:1fr 1fr;gap:.4rem 1rem}
+    .results dt{color:var(--muted);font-size:.88rem}
+    .results dd{margin:0;font:600 1.05rem "IBM Plex Sans Condensed",sans-serif;font-variant-numeric:tabular-nums}
+    .formula{font-size:.8rem;color:var(--muted);margin:.9rem 0 0}
+    .fields.c4{grid-template-columns:repeat(4,1fr)}
+    .results.c5{grid-template-columns:repeat(5,1fr)}
+    @media (max-width:900px){.fields.c4{grid-template-columns:1fr 1fr}.results.c5{grid-template-columns:1fr 1fr 1fr}}
+    @media (max-width:560px){.tools,.fields,.fields.c4,.results,.results.c5{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <a class="brand" href="index.html">Berke Sezer</a>
+    <nav aria-label="Main"><a href="index.html">Portfolio</a><a href="index.html#projects">Projects</a><a href="toolkit.html">Toolkit</a></nav>
+    <button id="theme" type="button" aria-label="Switch color theme">Dark mode</button>
+  </header>
+
+  <main>
+    <div class="page-head">
+      <h1 style="font-size:clamp(2.2rem,6vw,3.4rem)">ME Toolkit</h1>
+      <p>Small calculators I use for my coursework and projects: wind tunnel testing, time study and unit conversion. Results update as you type. Decimal comma or point both work.</p>
+    </div>
+
+    <div class="tools">
+      <section class="tool wide" id="wind">
+        <h2>Wind tunnel: flow and coefficients</h2>
+        <p class="note">Air density and viscosity are preset for about 15 °C at sea level. Change them if your lab conditions differ.</p>
+        <div class="fields c4">
+          <label>Velocity V (m/s)<input id="w_v" inputmode="decimal"></label>
+          <label>Density ρ (kg/m³)<input id="w_rho" inputmode="decimal" value="1.225"></label>
+          <label>Viscosity μ (Pa·s)<input id="w_mu" inputmode="decimal" value="0.0000181"></label>
+          <label>Chord c (m)<input id="w_c" inputmode="decimal"></label>
+          <label>Planform area S (m²)<input id="w_s" inputmode="decimal"></label>
+          <label>Lift FL (N)<input id="w_fl" inputmode="decimal"></label>
+          <label>Drag FD (N)<input id="w_fd" inputmode="decimal"></label>
+        </div>
+        <dl class="results c5">
+          <div><dt>Dynamic pressure q</dt><dd id="w_q">—</dd></div>
+          <div><dt>Reynolds number</dt><dd id="w_re">—</dd></div>
+          <div><dt>CL</dt><dd id="w_cl">—</dd></div>
+          <div><dt>CD</dt><dd id="w_cd">—</dd></div>
+          <div><dt>CL / CD</dt><dd id="w_ld">—</dd></div>
+        </dl>
+        <p class="formula">q = ½ρV² · Re = ρVc/μ · CL = FL/(qS) · CD = FD/(qS)</p>
+      </section>
+
+      <section class="tool" id="block">
+        <h2>Blockage ratio</h2>
+        <p class="note">Model frontal area divided by test section area.</p>
+        <div class="fields">
+          <label>Model frontal area (cm²)<input id="b_m" inputmode="decimal"></label>
+          <label>Test section area (cm²)<input id="b_t" inputmode="decimal"></label>
+        </div>
+        <dl class="results"><div><dt>Blockage ratio</dt><dd id="b_r">—</dd></div></dl>
+        <p class="formula">Blockage = A_model / A_test section × 100</p>
+      </section>
+
+      <section class="tool" id="st">
+        <h2>Strouhal number</h2>
+        <p class="note">Vortex shedding frequency, scaled by size and speed.</p>
+        <div class="fields">
+          <label>Frequency f (Hz)<input id="s_f" inputmode="decimal"></label>
+          <label>Length L (m)<input id="s_l" inputmode="decimal"></label>
+          <label>Velocity V (m/s)<input id="s_v" inputmode="decimal"></label>
+        </div>
+        <dl class="results"><div><dt>St</dt><dd id="s_r">—</dd></div></dl>
+        <p class="formula">St = f · L / V</p>
+      </section>
+
+      <section class="tool" id="ts">
+        <h2>Time study</h2>
+        <p class="note">Standard time from stopwatch observations.</p>
+        <div class="fields">
+          <label>Observed time (s)<input id="t_o" inputmode="decimal"></label>
+          <label>Performance rating (%)<input id="t_r" inputmode="decimal" value="100"></label>
+          <label>Allowance (%)<input id="t_a" inputmode="decimal" value="10"></label>
+        </div>
+        <dl class="results">
+          <div><dt>Normal time</dt><dd id="t_n">—</dd></div>
+          <div><dt>Standard time</dt><dd id="t_s">—</dd></div>
+          <div><dt>Units per hour</dt><dd id="t_h">—</dd></div>
+        </dl>
+        <p class="formula">Normal = observed × rating/100 · Standard = normal × (1 + allowance/100)</p>
+      </section>
+
+      <section class="tool" id="pw">
+        <h2>Power from torque</h2>
+        <p class="note">Shaft power from torque and speed.</p>
+        <div class="fields">
+          <label>Torque T (N·m)<input id="p_t" inputmode="decimal"></label>
+          <label>Speed n (rpm)<input id="p_n" inputmode="decimal"></label>
+        </div>
+        <dl class="results">
+          <div><dt>Angular speed ω</dt><dd id="p_w">—</dd></div>
+          <div><dt>Power</dt><dd id="p_p">—</dd></div>
+          <div><dt>Power (hp)</dt><dd id="p_h">—</dd></div>
+        </dl>
+        <p class="formula">ω = 2π·n/60 · P = T·ω · 1 hp = 745.7 W</p>
+      </section>
+
+      <section class="tool wide" id="conv">
+        <h2>Unit converter</h2>
+        <div class="fields c4">
+          <label>Quantity<select id="c_q"></select></label>
+          <label>Value<input id="c_v" inputmode="decimal"></label>
+          <label>From<select id="c_f"></select></label>
+          <label>To<select id="c_t"></select></label>
+        </div>
+        <dl class="results"><div><dt>Result</dt><dd id="c_r">—</dd></div></dl>
+      </section>
+    </div>
+  </main>
+
+  <footer><p>© 2026 Berke Sezer · <a href="index.html">Back to portfolio</a></p></footer>
+
+  <script>
+    var $ = function (id) { return document.getElementById(id); };
+    function num(id) { var v = $(id).value.trim().replace(',', '.'); return v === '' ? NaN : Number(v); }
+    function fmt(x) {
+      if (x === 0) return '0';
+      var a = Math.abs(x);
+      return (a >= 1e6 || a < 1e-3) ? x.toExponential(4) : String(Number(x.toPrecision(6)));
+    }
+    function out(id, x, unit) { $(id).textContent = isFinite(x) ? fmt(x) + (unit ? ' ' + unit : '') : '—'; }
+
+    function wind() {
+      var V = num('w_v'), rho = num('w_rho'), mu = num('w_mu'), c = num('w_c'), S = num('w_s'), FL = num('w_fl'), FD = num('w_fd');
+      var q = 0.5 * rho * V * V;
+      out('w_q', q, 'Pa'); out('w_re', rho * V * c / mu);
+      out('w_cl', FL / (q * S)); out('w_cd', FD / (q * S)); out('w_ld', FL / FD);
+    }
+    function block() { out('b_r', num('b_m') / num('b_t') * 100, '%'); }
+    function st() { out('s_r', num('s_f') * num('s_l') / num('s_v')); }
+    function ts() {
+      var normal = num('t_o') * num('t_r') / 100, std = normal * (1 + num('t_a') / 100);
+      out('t_n', normal, 's'); out('t_s', std, 's'); out('t_h', 3600 / std);
+    }
+    function pw() {
+      var w = 2 * Math.PI * num('p_n') / 60, P = num('p_t') * w;
+      out('p_w', w, 'rad/s'); out('p_p', P, 'W'); out('p_h', P / 745.7, 'hp');
+    }
+
+    var UNITS = {
+      'Length':      { mm: 0.001, cm: 0.01, m: 1, 'in': 0.0254, ft: 0.3048 },
+      'Force':       { N: 1, kN: 1000, lbf: 4.4482216152605, kgf: 9.80665 },
+      'Pressure':    { Pa: 1, kPa: 1000, bar: 100000, psi: 6894.757293168, atm: 101325, mmHg: 133.322387415 },
+      'Speed':       { 'm/s': 1, 'km/h': 1 / 3.6, mph: 0.44704, knot: 0.514444444 },
+      'Temperature': { '°C': 0, 'K': 0, '°F': 0 }
+    };
+    function fill(sel, keys, idx) { sel.innerHTML = keys.map(function (k) { return '<option>' + k + '</option>'; }).join(''); sel.selectedIndex = idx; }
+    function onQuantity() {
+      var keys = Object.keys(UNITS[$('c_q').value]);
+      fill($('c_f'), keys, 0); fill($('c_t'), keys, Math.min(1, keys.length - 1)); conv();
+    }
+    function toC(v, u) { return u === '°C' ? v : u === 'K' ? v - 273.15 : (v - 32) * 5 / 9; }
+    function fromC(c, u) { return u === '°C' ? c : u === 'K' ? c + 273.15 : c * 9 / 5 + 32; }
+    function conv() {
+      var q = $('c_q').value, v = num('c_v'), f = $('c_f').value, t = $('c_t').value, r;
+      r = q === 'Temperature' ? fromC(toC(v, f), t) : v * UNITS[q][f] / UNITS[q][t];
+      out('c_r', r, t);
+    }
+    fill($('c_q'), Object.keys(UNITS), 0); onQuantity();
+
+    var map = { wind: wind, block: block, st: st, ts: ts, pw: pw, conv: conv };
+    Object.keys(map).forEach(function (id) {
+      $(id).addEventListener('input', map[id]); $(id).addEventListener('change', map[id]);
+    });
+    ts(); wind();
+
+    var root = document.documentElement, btn = $('theme');
+    function label() { btn.textContent = root.getAttribute('data-theme') === 'dark' ? 'Light mode' : 'Dark mode'; }
+    try { var s = localStorage.getItem('theme'); if (s) root.setAttribute('data-theme', s); } catch (e) {}
+    if (!root.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches) root.setAttribute('data-theme', 'dark');
+    label();
+    btn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      label();
+    });
+  </script>
+</body>
+</html>
